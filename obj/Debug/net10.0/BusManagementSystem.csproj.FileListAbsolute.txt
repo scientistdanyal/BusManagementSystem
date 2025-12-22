@@ -157,7 +157,6 @@ C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Deb
 C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\scopedcss\bundle\BusManagementSystem.styles.css
 C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\scopedcss\projectbundle\BusManagementSystem.bundle.scp.css
 C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\compressed\7vdud0n3if-{0}-61n19gt1b8-61n19gt1b8.gz
-C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\compressed\kat02xlwtq-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\compressed\ruo3vezkvq-{0}-bqjiyaj88i-bqjiyaj88i.gz
 C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\compressed\y8w2snjdsa-{0}-c2jlpeoesf-c2jlpeoesf.gz
 C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\compressed\ymwawv7oky-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -344,4 +343,6 @@ C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\bin\Deb
 C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
-C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\compressed\ggvtu0qnsp-{0}-tsaobyygjc-tsaobyygjc.gz
+C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\BusManagementSystem.sourcelink.json
+C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\compressed\ggvtu0qnsp-{0}-b9m60iyvn0-b9m60iyvn0.gz
+C:\Users\Danyal's_Laptop\Desktop\BusManagementSystem\BusManagementSystem\obj\Debug\net10.0\compressed\kat02xlwtq-{0}-9qjd438oin-9qjd438oin.gz

@@ -1,91 +1,247 @@
-﻿@{
+﻿@model BusManagementSystem.Models.DashboardViewModel
+
+@{
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="page-header">
-    <div class="container">
-        <h1>Welcome to Bus Management System</h1>
-        <p class="lead">Manage your buses, routes, trips, passengers, and bookings efficiently</p>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row g-4 mb-4">
-        <div class="col-md-6 col-lg-4">
-            <a asp-controller="Buses" asp-action="Index" class="dashboard-card">
-                <div class="dashboard-card-icon buses">
-                    🚌
-                </div>
-                <h3>Buses</h3>
-                <p>Manage bus fleet and vehicle information</p>
-            </a>
+<section class="dashboard-shell">
+    <header class="dashboard-header">
+        <div>
+            <h1 class="dashboard-title">Operations overview</h1>
+            <p class="dashboard-subtitle">
+                Monitor trips, routes, seats, and buses from a single calm control surface.
+            </p>
         </div>
-        
-        <div class="col-md-6 col-lg-4">
-            <a asp-controller="BusRoutes" asp-action="Index" class="dashboard-card">
-                <div class="dashboard-card-icon routes">
-                    🗺️
-                </div>
-                <h3>Routes</h3>
-                <p>Configure bus routes and destinations</p>
-            </a>
-        </div>
-        
-        <div class="col-md-6 col-lg-4">
-            <a asp-controller="Trips" asp-action="Index" class="dashboard-card">
-                <div class="dashboard-card-icon trips">
-                    📅
-                </div>
-                <h3>Trips</h3>
-                <p>Schedule and manage bus trips</p>
-            </a>
-        </div>
-        
-        <div class="col-md-6 col-lg-4">
-            <a asp-controller="Passengers" asp-action="Index" class="dashboard-card">
-                <div class="dashboard-card-icon passengers">
-                    👥
-                </div>
-                <h3>Passengers</h3>
-                <p>Manage passenger information and profiles</p>
-            </a>
-        </div>
-        
-        <div class="col-md-6 col-lg-4">
-            <a asp-controller="Bookings" asp-action="Index" class="dashboard-card">
-                <div class="dashboard-card-icon bookings">
-                    🎫
-                </div>
-                <h3>Bookings</h3>
-                <p>View and manage passenger bookings</p>
-            </a>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-12">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body p-4">
-                    <h4 class="card-title mb-3">Quick Actions</h4>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <a asp-controller="Buses" asp-action="Create" class="btn btn-primary w-100">
-                                ➕ Add New Bus
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a asp-controller="Trips" asp-action="Create" class="btn btn-primary w-100">
-                                ➕ Create New Trip
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a asp-controller="Passengers" asp-action="Create" class="btn btn-primary w-100">
-                                ➕ Register Passenger
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        <div class="dashboard-header-actions">
+            <div class="chip chip-soft">
+                <span class="chip-dot chip-dot-success"></span>
+                <span>Realtime status</span>
+            </div>
+            <div class="chip">
+                <span class="chip-label">Today</span>
             </div>
         </div>
+    </header>
+
+    <div class="dashboard-grid">
+        <!-- Trips Timing -->
+        <section class="dashboard-card dashboard-card--primary" aria-labelledby="tripsTimingTitle">
+            <header class="dashboard-card-header">
+                <div>
+                    <h2 id="tripsTimingTitle" class="dashboard-card-title">Trips timing</h2>
+                    <p class="dashboard-card-subtitle">Upcoming departures and arrivals across your network.</p>
+                </div>
+                <a asp-controller="Trips" asp-action="Index" class="dashboard-link">
+                    View all trips
+                </a>
+            </header>
+            <div class="timeline-list">
+                @if (!Model.UpcomingTrips.Any())
+                {
+                    <div class="timeline-row skeleton-row">
+                        <div class="timeline-time skeleton-block"></div>
+                        <div class="timeline-main">
+                            <div class="timeline-line skeleton-block"></div>
+                            <div class="timeline-meta skeleton-block skeleton-short"></div>
+                        </div>
+                    </div>
+                    <div class="empty-state subtle">
+                        <p class="mb-1">No upcoming trips in the future.</p>
+                        <p class="mb-0 text-muted small">Create a trip to see it appear here instantly.</p>
+                    </div>
+                }
+                else
+                {
+                    foreach (var trip in Model.UpcomingTrips)
+                    {
+                        var departure = trip.DepartureTime.ToLocalTime();
+                        var arrival = trip.ArrivalTime.ToLocalTime();
+                        var now = DateTime.Now;
+                        var minutesUntil = (int)Math.Round((departure - now).TotalMinutes);
+                        var timeSub = minutesUntil <= 0
+                            ? "now"
+                            : $"in {minutesUntil} min";
+
+                        <div class="timeline-row">
+                            <div class="timeline-time">
+                                <span class="time-label">@departure.ToString("HH:mm")</span>
+                                <span class="time-sub">@timeSub</span>
+                            </div>
+                            <div class="timeline-main">
+                                <div class="timeline-title">
+                                    @trip.RouteName
+                                    <span class="badge-status badge-status--on-time">On schedule</span>
+                                </div>
+                                <div class="timeline-meta">
+                                    Bus @trip.BusLabel • Arrival @arrival.ToString("HH:mm") • Seats @trip.BookedSeats / @trip.Capacity
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+
+        <!-- Routes Overview -->
+        <section class="dashboard-card" aria-labelledby="routesOverviewTitle">
+            <header class="dashboard-card-header">
+                <div>
+                    <h2 id="routesOverviewTitle" class="dashboard-card-title">Routes overview</h2>
+                    <p class="dashboard-card-subtitle">Key corridors with live health and utilization.</p>
+                </div>
+                <a asp-controller="BusRoutes" asp-action="Index" class="dashboard-link">
+                    Manage routes
+                </a>
+            </header>
+            <div class="routes-list">
+                @if (!Model.Routes.Any())
+                {
+                    <div class="empty-state subtle">
+                        <p class="mb-1">No routes with scheduled trips yet.</p>
+                        <p class="mb-0 text-muted small">Create routes and trips to see utilization here.</p>
+                    </div>
+                }
+                else
+                {
+                    foreach (var route in Model.Routes)
+                    {
+                        <article class="routes-row">
+                            <div class="routes-main">
+                                <div class="routes-name">@route.RouteName</div>
+                                <div class="routes-meta">
+                                    @route.TripCountToday trip(s) today • @route.TotalTrips total
+                                </div>
+                            </div>
+                            <div class="routes-pills">
+                                <span class="pill pill-soft pill-success">
+                                    @route.ApproxBookedSeats booked seats
+                                </span>
+                            </div>
+                        </article>
+                    }
+                }
+            </div>
+        </section>
+
+        <!-- Available Seats per Bus -->
+        <section class="dashboard-card" aria-labelledby="availableSeatsTitle">
+            <header class="dashboard-card-header">
+                <div>
+                    <h2 id="availableSeatsTitle" class="dashboard-card-title">Available seats per bus</h2>
+                    <p class="dashboard-card-subtitle">Seat utilization by bus, color-coded by risk.</p>
+                </div>
+                <a asp-controller="Bookings" asp-action="Index" class="dashboard-link">
+                    Open bookings
+                </a>
+            </header>
+            <div class="seats-list">
+                @if (!Model.BusSeats.Any())
+                {
+                    <div class="empty-state subtle">
+                        <p class="mb-1">No upcoming trips with buses assigned.</p>
+                        <p class="mb-0 text-muted small">Once trips are scheduled, seat utilization per bus will appear here.</p>
+                    </div>
+                }
+                else
+                {
+                    foreach (var bus in Model.BusSeats)
+                    {
+                        var percent = bus.Capacity <= 0
+                            ? 0
+                            : Math.Clamp((int)Math.Round(bus.Utilization * 100), 0, 100);
+                        var cssClass = percent < 80 ? "is-green" : percent < 95 ? "is-amber" : "is-red";
+
+                        <div class="seats-row">
+                            <div class="seats-main">
+                                <div class="seats-bus">
+                                    Bus @bus.BusLabel
+                                    <span class="pill pill-soft">@bus.RouteName</span>
+                                </div>
+                                <div class="seats-meta">@bus.BookedSeats / @bus.Capacity seats booked</div>
+                            </div>
+                            <div class="seats-meter">
+                                <div class="seats-bar @cssClass" style="--seats-percent: @percent%;"></div>
+                            </div>
+                            <div class="seats-value">
+                                @bus.FreeSeats seats
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+
+        <!-- Route per Bus -->
+        <section class="dashboard-card" aria-labelledby="routesPerBusTitle">
+            <header class="dashboard-card-header">
+                <div>
+                    <h2 id="routesPerBusTitle" class="dashboard-card-title">Route per bus</h2>
+                    <p class="dashboard-card-subtitle">Each bus mapped to its current assigned route.</p>
+                </div>
+                <a asp-controller="Buses" asp-action="Index" class="dashboard-link">
+                    Manage buses
+                </a>
+            </header>
+            <div class="routes-bus-grid">
+                @if (!Model.BusRouteAssignments.Any())
+                {
+                    <div class="empty-state subtle">
+                        <p class="mb-1">No buses with upcoming trips yet.</p>
+                        <p class="mb-0 text-muted small">Assign trips to buses to see route mappings here.</p>
+                    </div>
+                }
+                else
+                {
+                    foreach (var assignment in Model.BusRouteAssignments)
+                    {
+                        var departure = assignment.NextDeparture?.ToLocalTime();
+
+                        <article class="routes-bus-card">
+                            <div class="routes-bus-header">
+                                <span class="routes-bus-id">@assignment.BusLabel</span>
+                                <span class="badge-status badge-status--on-time">On schedule</span>
+                            </div>
+                            <div class="routes-bus-body">
+                                <div class="routes-bus-route">
+                                    @{
+                                        var parts = assignment.RouteName.Split("→");
+                                        var origin = parts.Length > 0 ? parts[0].Trim() : assignment.RouteName;
+                                        var destination = parts.Length > 1 ? parts[^1].Trim() : string.Empty;
+                                    }
+                                    <span class="route-origin">@origin</span>
+                                    <span class="route-arrow">→</span>
+                                    <span class="route-destination">@destination</span>
+                                </div>
+                                <div class="routes-bus-meta">
+                                    @if (departure.HasValue)
+                                    {
+                                        @:Next departure @departure.Value.ToString("HH:mm") • Seats @assignment.FreeSeats free
+                                    }
+                                    else
+                                    {
+                                        @:No upcoming departure
+                                    }
+                                </div>
+                            </div>
+                        </article>
+                    }
+                }
+            </div>
+
+            <div class="dashboard-quick-actions mt-3">
+                <span class="dashboard-quick-label">Quick actions</span>
+                <div class="dashboard-quick-buttons">
+                    <a asp-controller="Trips" asp-action="Create" class="btn btn-primary btn-sm">
+                        + Schedule trip
+                    </a>
+                    <a asp-controller="Buses" asp-action="Create" class="btn btn-secondary btn-sm">
+                        + Add bus
+                    </a>
+                    <a asp-controller="Passengers" asp-action="Create" class="btn btn-outline-light btn-sm">
+                        + Register passenger
+                    </a>
+                </div>
+            </div>
+        </section>
     </div>
-</div>
+</section>

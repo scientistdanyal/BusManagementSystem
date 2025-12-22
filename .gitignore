@@ -1,0 +1,47 @@
+# Build results
+bin/
+obj/
+
+# Rider / VS / VS Code
+.idea/
+.vs/
+*.user
+*.suo
+*.userprefs
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Temp files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# ASP.NET Core specific
+wwwroot/lib/
+wwwroot/dist/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+project.lock.json
+artifacts/
+
+# Resharper / Analysis
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Publish output
+publish/
+out/
+
+# EF Core design-time
+Migrations/**/Snapshot.cs
+
+
