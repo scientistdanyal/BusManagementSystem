@@ -1,0 +1,41 @@
+﻿@model BusManagementSystem.Models.Bus
+
+@{
+    ViewData["Title"] = "Bus Details";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>Bus Details</h1>
+        <p class="lead">View bus information</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.RegistrationNumber)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                <strong>@Html.DisplayFor(model => model.RegistrationNumber)</strong>
+            </dd>
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.Capacity)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                @Html.DisplayFor(model => model.Capacity) passengers
+            </dd>
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+        <div class="mt-4">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </div>
+    </div>
+</div>

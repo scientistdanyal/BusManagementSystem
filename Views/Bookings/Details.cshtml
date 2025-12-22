@@ -1,0 +1,47 @@
+﻿@model BusManagementSystem.Models.Booking
+
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>Booking Details</h1>
+        <p class="lead">View booking information</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.TipId)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                <strong>Trip #@Html.DisplayFor(model => model.TipId)</strong>
+            </dd>
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.PassengerId)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                Passenger #@Html.DisplayFor(model => model.PassengerId)
+            </dd>
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.SeatNumber)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                <span class="badge bg-primary">Seat @Html.DisplayFor(model => model.SeatNumber)</span>
+            </dd>
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.BookingDate)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                @Html.DisplayFor(model => model.BookingDate)
+            </dd>
+        </dl>
+        <div class="mt-4">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </div>
+    </div>
+</div>

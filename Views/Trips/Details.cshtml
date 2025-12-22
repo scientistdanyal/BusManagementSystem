@@ -1,0 +1,47 @@
+﻿@model BusManagementSystem.Models.Trip
+
+@{
+    ViewData["Title"] = "Trip Details";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>Trip Details</h1>
+        <p class="lead">View trip information</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+        <dl class="row">
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.BusId)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                <strong>@(Model.Bus?.RegistrationNumber ?? $"Bus #{Model.BusId}")</strong>
+            </dd>
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.RouteId)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                <strong>@(Model.Route != null ? $"{Model.Route.FromCity} → {Model.Route.ToCity}" : $"Route #{Model.RouteId}")</strong>
+            </dd>
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.DepartureTime)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                @Html.DisplayFor(model => model.DepartureTime)
+            </dd>
+            <dt class="col-sm-3 mb-3">
+                @Html.DisplayNameFor(model => model.ArrivalTime)
+            </dt>
+            <dd class="col-sm-9 mb-3">
+                @Html.DisplayFor(model => model.ArrivalTime)
+            </dd>
+        </dl>
+        <div class="mt-4">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </div>
+    </div>
+</div>

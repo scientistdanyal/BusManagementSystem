@@ -1,0 +1,78 @@
+﻿@model IEnumerable<BusManagementSystem.Models.BusRoute>
+
+@{
+    ViewData["Title"] = "Routes";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>Bus Routes</h1>
+        <p class="lead">Manage bus routes and destinations</p>
+    </div>
+</div>
+
+<div class="container">
+    @if (Context.Session.GetString(BusManagementSystem.Controllers.AdminController.AdminSessionKey) == "true")
+    {
+        <a asp-action="Create" class="btn-create">
+            ➕ Create New Route
+        </a>
+    }
+
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FromCity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToCity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DistanceKm)
+                    </th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@Html.DisplayFor(modelItem => item.FromCity)</strong>
+                            </td>
+                            <td>
+                                <strong>@Html.DisplayFor(modelItem => item.ToCity)</strong>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DistanceKm) km
+                            </td>
+                            <td class="text-end">
+                                <div class="action-buttons">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn-action btn-details">Details</a>
+                                    @if (Context.Session.GetString(BusManagementSystem.Controllers.AdminController.AdminSessionKey) == "true")
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action btn-edit">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-action btn-delete">Delete</a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center empty-state">
+                            <p class="mt-2" style="font-size: 48px;">📦</p>
+                            <p class="mt-2">No routes found. <a asp-action="Create">Create a new route</a> to get started.</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

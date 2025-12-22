@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>Welcome to Bus Management System</h1>
+        <p class="lead">Manage your buses, routes, trips, passengers, and bookings efficiently</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row g-4 mb-4">
+        <div class="col-md-6 col-lg-4">
+            <a asp-controller="Buses" asp-action="Index" class="dashboard-card">
+                <div class="dashboard-card-icon buses">
+                    🚌
+                </div>
+                <h3>Buses</h3>
+                <p>Manage bus fleet and vehicle information</p>
+            </a>
+        </div>
+        
+        <div class="col-md-6 col-lg-4">
+            <a asp-controller="BusRoutes" asp-action="Index" class="dashboard-card">
+                <div class="dashboard-card-icon routes">
+                    🗺️
+                </div>
+                <h3>Routes</h3>
+                <p>Configure bus routes and destinations</p>
+            </a>
+        </div>
+        
+        <div class="col-md-6 col-lg-4">
+            <a asp-controller="Trips" asp-action="Index" class="dashboard-card">
+                <div class="dashboard-card-icon trips">
+                    📅
+                </div>
+                <h3>Trips</h3>
+                <p>Schedule and manage bus trips</p>
+            </a>
+        </div>
+        
+        <div class="col-md-6 col-lg-4">
+            <a asp-controller="Passengers" asp-action="Index" class="dashboard-card">
+                <div class="dashboard-card-icon passengers">
+                    👥
+                </div>
+                <h3>Passengers</h3>
+                <p>Manage passenger information and profiles</p>
+            </a>
+        </div>
+        
+        <div class="col-md-6 col-lg-4">
+            <a asp-controller="Bookings" asp-action="Index" class="dashboard-card">
+                <div class="dashboard-card-icon bookings">
+                    🎫
+                </div>
+                <h3>Bookings</h3>
+                <p>View and manage passenger bookings</p>
+            </a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="card-title mb-3">Quick Actions</h4>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <a asp-controller="Buses" asp-action="Create" class="btn btn-primary w-100">
+                                ➕ Add New Bus
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-controller="Trips" asp-action="Create" class="btn btn-primary w-100">
+                                ➕ Create New Trip
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-controller="Passengers" asp-action="Create" class="btn btn-primary w-100">
+                                ➕ Register Passenger
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

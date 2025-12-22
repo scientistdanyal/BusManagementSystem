@@ -1,0 +1,54 @@
+﻿@model BusManagementSystem.Models.BusRoute
+
+@{
+    ViewData["Title"] = "Edit Route";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>Edit Route</h1>
+        <p class="lead">Update route information</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="form-container">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group mb-3">
+                        <label asp-for="FromCity" class="form-label"></label>
+                        <input asp-for="FromCity" class="form-control" placeholder="Enter origin city" />
+                        <span asp-validation-for="FromCity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ToCity" class="form-label"></label>
+                        <input asp-for="ToCity" class="form-control" placeholder="Enter destination city" />
+                        <span asp-validation-for="ToCity" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label asp-for="DistanceKm" class="form-label"></label>
+                        <input asp-for="DistanceKm" type="number" step="0.01" class="form-control" placeholder="Enter distance in kilometers" />
+                        <span asp-validation-for="DistanceKm" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save Changes" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <a asp-action="Index" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+        </svg>
+        Back to List
+    </a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

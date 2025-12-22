@@ -1,0 +1,78 @@
+﻿@model IEnumerable<BusManagementSystem.Models.Passenger>
+
+@{
+    ViewData["Title"] = "Passengers";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>Passengers</h1>
+        <p class="lead">Manage passenger information</p>
+    </div>
+</div>
+
+<div class="container">
+    @if (Context.Session.GetString(BusManagementSystem.Controllers.AdminController.AdminSessionKey) == "true")
+    {
+        <a asp-action="Create" class="btn-create">
+            ➕ Register New Passenger
+        </a>
+    }
+
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@Html.DisplayFor(modelItem => item.FullName)</strong>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td class="text-end">
+                                <div class="action-buttons">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn-action btn-details">Details</a>
+                                    @if (Context.Session.GetString(BusManagementSystem.Controllers.AdminController.AdminSessionKey) == "true")
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-action btn-edit">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-action btn-delete">Delete</a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center empty-state">
+                            <p class="mt-2" style="font-size: 48px;">📦</p>
+                            <p class="mt-2">No passengers found. <a asp-action="Create">Register a new passenger</a> to get started.</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
