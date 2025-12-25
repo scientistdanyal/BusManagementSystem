@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fXIlUPkm5q8=",
+  "dgSpecHash": "fgu8n6Aiu2I=",
   "success": true,
   "projectFilePath": "C:\\Users\\Danyal's_Laptop\\Desktop\\BusManagementSystem\\BusManagementSystem\\BusManagementSystem.csproj",
   "expectedPackageFiles": [
@@ -136,18 +136,5 @@
     "C:\\Users\\Danyal's_Laptop\\.nuget\\packages\\system.security.permissions\\9.0.0\\system.security.permissions.9.0.0.nupkg.sha512",
     "C:\\Users\\Danyal's_Laptop\\.nuget\\packages\\system.windows.extensions\\9.0.0\\system.windows.extensions.9.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "message": "Package 'Microsoft.Build' 17.11.4 has a known high severity vulnerability, https://github.com/advisories/GHSA-w3q9-fxm7-j8fq",
-      "projectPath": "C:\\Users\\Danyal's_Laptop\\Desktop\\BusManagementSystem\\BusManagementSystem\\BusManagementSystem.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\Danyal's_Laptop\\Desktop\\BusManagementSystem\\BusManagementSystem\\BusManagementSystem.csproj",
-      "libraryId": "Microsoft.Build",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  "logs": []
 }
